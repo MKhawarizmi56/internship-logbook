@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Industrial Training Log Book</title>
+<style>
+:root{
+  --navy:#16355f;
+  --blue:#2f6fb2;
+  --sky:#dfefff;
+  --gold:#f0c14b;
+  --mint:#daf3ea;
+  --soft:#f7f9fc;
+  --text:#1e293b;
+  --muted:#64748b;
+  --line:#dbe4f0;
+  --white:#ffffff;
+  --shadow:0 12px 28px rgba(15, 23, 42, .08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI", Arial, sans-serif;
+  background:linear-gradient(180deg,#eef5ff 0%, #f8fbff 100%);
+  color:var(--text);
+}
+.container{
+  width:min(1180px, 94%);
+  margin:28px auto 50px;
+}
+.header{
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  color:#fff;
+  border-radius:24px;
+  padding:26px 28px;
+  box-shadow:var(--shadow);
+}
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:18px;
+  flex-wrap:wrap;
+}
+.brand h1{
+  margin:0 0 8px;
+  font-size:2rem;
+  letter-spacing:.3px;
+}
+.brand p{
+  margin:0;
+  color:rgba(255,255,255,.90);
+  line-height:1.6;
+}
+.identity{
+  min-width:360px;
+  background:rgba(255,255,255,.12);
+  padding:16px 18px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:18px;
+}
+.identity-wrap{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.profile-photo{
+  width:94px;
+  height:94px;
+  border-radius:18px;
+  object-fit:cover;
+  border:3px solid rgba(255,255,255,.28);
+  background:#fff;
+  flex-shrink:0;
+}
+.identity-text .name{
+  font-size:1.08rem;
+  font-weight:700;
+  margin-bottom:6px;
+}
+.identity-text div{
+  line-height:1.5;
+}
+.stats{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
+}
+.stat-card{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+.stat-card .label{
+  color:var(--muted);
+  font-size:.92rem;
+  margin-bottom:8px;
+}
+.stat-card .value{
+  font-size:1.55rem;
+  font-weight:800;
+  color:var(--navy);
+}
+.controls{
+  display:grid;
+  grid-template-columns:1.25fr .85fr .85fr auto auto;
+  gap:12px;
+  margin:20px 0;
+}
+.controls input,.controls select,.controls button{
+  width:100%;
+  border-radius:14px;
+  border:1px solid var(--line);
+  padding:12px 14px;
+  font:inherit;
+  background:#fff;
+}
+.controls button{
+  cursor:pointer;
+  font-weight:600;
+  transition:.2s ease;
+}
+.controls button.primary{
+  background:var(--navy);
+  color:#fff;
+  border-color:var(--navy);
+}
+.controls button.secondary{
+  background:var(--gold);
+  color:#322400;
+  border-color:#dfb135;
+}
+.controls button:hover{transform:translateY(-1px)}
+.layout{
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:18px;
+}
+.panel{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:22px;
+  box-shadow:var(--shadow);
+}
+.sidebar{
+  padding:20px;
+  position:sticky;
+  top:18px;
+  align-self:start;
+}
+.sidebar h2,.content h2{
+  margin:0 0 14px;
+  font-size:1.16rem;
+  color:var(--navy);
+}
+.profile-card{
+  display:grid;
+  gap:12px;
+}
+.profile-kv{
+  background:var(--soft);
+  border:1px solid #edf2f8;
+  border-radius:16px;
+  padding:12px 14px;
+}
+.profile-kv strong{
+  display:block;
+  font-size:.86rem;
+  color:var(--navy);
+  margin-bottom:4px;
+}
+.profile-kv span{
+  display:block;
+  color:var(--text);
+  line-height:1.55;
+  font-size:.95rem;
+}
+.content{
+  padding:20px;
+}
+.week-block{
+  margin-bottom:18px;
+}
+.week-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+.week-title h3{
+  margin:0;
+  color:var(--navy);
+  font-size:1.2rem;
+}
+.week-chip{
+  background:var(--mint);
+  color:#135846;
+  padding:8px 12px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:.9rem;
+}
+.entry-grid{
+  display:grid;
+  gap:14px;
+}
+.entry-card{
+  border:1px solid var(--line);
+  border-radius:22px;
+  overflow:hidden;
+  background:#fff;
+}
+.entry-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  padding:16px 18px;
+  background:linear-gradient(180deg,#fbfdff,#f4f8fe);
+  border-bottom:1px solid var(--line);
+}
+.entry-head-left{
+  display:flex;
+  gap:14px;
+}
+.date-box{
+  min-width:88px;
+  text-align:center;
+  background:var(--navy);
+  color:#fff;
+  border-radius:16px;
+  padding:10px 8px;
+}
+.date-box .day{font-size:1.5rem;font-weight:800;line-height:1}
+.date-box .month{font-size:.88rem;opacity:.92}
+.entry-meta h4{
+  margin:0 0 6px;
+  font-size:1.08rem;
+  color:var(--navy);
+}
+.entry-meta .sub{
+  color:var(--muted);
+  font-size:.94rem;
+  line-height:1.5;
+}
+.status-tag{
+  background:#e9f8ef;
+  color:#15653a;
+  font-weight:700;
+  border:1px solid #bfebce;
+  padding:8px 10px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+.entry-body{
+  display:grid;
+  grid-template-columns:1.2fr .9fr;
+  gap:16px;
+  padding:16px 18px 18px;
+}
+.section-card{
+  background:var(--soft);
+  border:1px solid #edf2f8;
+  border-radius:18px;
+  padding:14px 15px;
+}
+.section-card h5{
+  margin:0 0 10px;
+  color:var(--navy);
+  font-size:.98rem;
+}
+.section-card ul{
+  margin:0;
+  padding-left:18px;
+  line-height:1.6;
+}
+.kv{
+  display:grid;
+  gap:10px;
+}
+.kv div{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:10px 12px;
+}
+.kv strong{
+  display:block;
+  color:var(--navy);
+  margin-bottom:5px;
+  font-size:.9rem;
+}
+.photo-wrap{
+  margin-top:12px;
+  border:1px dashed #b6c7dd;
+  border-radius:18px;
+  padding:10px;
+  background:#fff;
+}
+.photo-wrap img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+  display:block;
+}
+.photo-wrap .placeholder{
+  height:220px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  color:var(--muted);
+  background:linear-gradient(180deg,#f8fbff,#eef5ff);
+  border-radius:12px;
+  font-size:.93rem;
+  padding:20px;
+}
+@media (max-width: 980px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .controls{grid-template-columns:1fr 1fr}
+  .entry-body{grid-template-columns:1fr}
+}
+@media (max-width: 640px){
+  .controls{grid-template-columns:1fr}
+  .entry-head{padding:14px}
+  .entry-head-left{flex-direction:column}
+  .date-box{min-width:100%}
+  .identity-wrap{align-items:flex-start}
+}
+@media print{
+  body{background:#fff}
+  .controls{display:none}
+  .container{width:100%;margin:0}
+  .header,.panel,.entry-card,.stat-card{box-shadow:none}
+  .layout{grid-template-columns:1fr}
+  .entry-card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <section class="header">
+    <div class="header-top">
+      <div class="brand">
+        <h1>Industrial Training Log Book</h1>
+        <p>
+          MUHAMMAD KHAWARIZMI BIN MD SUZAMI<br>
+          U5A - Bachelor of Science with Honours (Information Technology)<br>
+          Universiti Utara Malaysia
+        </p>
+      </div>
+      <div class="identity">
+        <div class="identity-wrap">
+          <img class="profile-photo" src="images/profile.jpg" alt="Profile Photo" onerror="this.onerror=null;this.src='images/profile-placeholder.png';">
+          <div class="identity-text">
+            <div class="name">MUHAMMAD KHAWARIZMI BIN MD SUZAMI</div>
+            <div>Student ID: 294489</div>
+            <div>Placement: JHEPA, Universiti Utara Malaysia</div>
+            <div>Position: Pelatih Industri, Bahagian Pentadbiran dan Kewangan, JHEPA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats" id="stats"></section>
+
+  <section class="controls">
+    <input id="searchInput" type="text" placeholder="Search task, tool, week, or keyword..." />
+    <select id="weekFilter">
+      <option value="all">All Weeks</option>
+    </select>
+    <select id="statusFilter">
+      <option value="all">All Status</option>
+      <option value="Completed">Completed</option>
+      <option value="Pending">Pending</option>
+    </select>
+    <button class="primary" onclick="window.print()">Print / Save PDF</button>
+    <button class="secondary" onclick="resetFilters()">Reset</button>
+  </section>
+
+  <div class="layout">
+    <aside class="panel sidebar">
+      <h2>Trainee Profile</h2>
+      <div class="profile-card">
+        <div class="profile-kv">
+          <strong>Department</strong>
+          <span>Bahagian Pentadbiran dan Kewangan, Pejabat Timbalan Naib Canselor (Hal Ehwal Pelajar dan Alumni)</span>
+        </div>
+        <div class="profile-kv">
+          <strong>Role</strong>
+          <span>Pelatih industri yang membantu urusan dokumentasi, pelaporan, persediaan mesyuarat, pengurusan rekod digital, dan penyelarasan aliran kerja pejabat.</span>
+        </div>
+        <div class="profile-kv">
+          <strong>Supervisor</strong>
+          <span>Wan Yuswanee Binti Wan Yusoff</span>
+        </div>
+        <div class="profile-kv">
+          <strong>Training Period</strong>
+          <span>1 April 2026 – 30 September 2026</span>
+        </div>
+        <div class="profile-kv">
+          <strong>Working Days</strong>
+          <span>Sunday to Thursday</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="panel content">
+      <h2>Daily Entries</h2>
+      <div id="entriesContainer"></div>
+    </main>
+  </div>
+</div>
+
+<script>
+const entries = [
+  {
+    date: "1 April 2026",
+    week: "Week 1",
+    day: "Day 1",
+    title: "Orientation and Introduction",
+    tasks: [
+      "Reported for duty",
+      "Met supervisor",
+      "Attended office briefing"
+    ],
+    tools: ["Microsoft Word", "Outlook", "Office documents"],
+    skills: ["professional communication", "adaptation", "workplace discipline"],
+    challenge: "Adjusting to a new professional environment and understanding the workflow quickly.",
+    solution: "Took structured notes during the briefing and clarified responsibilities with the supervisor.",
+    reflection: "This day helped me understand the department's expectations and the importance of professionalism from the start.",
+    status: "Completed",
+    image: "images/day1.jpg"
+  },
+  {
+    date: "2 April 2026",
+    week: "Week 1",
+    day: "Day 2",
+    title: "System Learning and Department Orientation",
+    tasks: [
+      "Observed workflow",
+      "Assisted documentation",
+      "Learned internal file handling"
+    ],
+    tools: ["Microsoft Word", "Microsoft Excel", "Shared folders"],
+    skills: ["record management", "observation", "organisation"],
+    challenge: "Understanding how documents move between staff and folders.",
+    solution: "Followed sample files and asked for examples of correctly completed records.",
+    reflection: "I became more familiar with how a structured office workflow operates in practice.",
+    status: "Completed",
+    image: "images/day2.jpg"
+  },
+  {
+    date: "5 April 2026",
+    week: "Week 2",
+    day: "Day 3",
+    title: "Discussion and Consultation",
+    tasks: [
+      "Consultation with staff",
+      "Discussed expectations",
+      "Reviewed documentation process",
+      "Discussed future tasks"
+    ],
+    tools: ["Microsoft Word", "Meeting notes", "Sample records"],
+    skills: ["communication", "note-taking", "task understanding"],
+    challenge: "Translating general instructions into practical daily work expectations.",
+    solution: "Summarised the discussion into clear action points for the next working days.",
+    reflection: "The discussion gave me better direction and clarified how my tasks should support the department.",
+    status: "Completed",
+    image: "images/day3.jpg"
+  },
+  {
+    date: "6 April 2026",
+    week: "Week 2",
+    day: "Day 4",
+    title: "Meeting Preparation Support",
+    tasks: [
+      "Prepared slides for future meeting",
+      "Made early preparations for meeting minutes",
+      "Consulted peers and senior staff on preparation"
+    ],
+    tools: ["Microsoft PowerPoint", "Microsoft Word"],
+    skills: ["meeting preparation", "reporting", "teamwork"],
+    challenge: "Ensuring that supporting documents were properly prepared before the meeting.",
+    solution: "Reviewed document order, formatting, and expected content with senior staff.",
+    reflection: "I learned that meeting preparation requires accuracy, readiness, and strong coordination.",
+    status: "Completed",
+    image: "images/day4.jpg"
+  },
+  {
+  date: "7 April 2026",
+  week: "Week 2",
+  day: "Day 5",
+  title: "Data Preparation, Slide Editing & Logistics Support",
+  tasks: [
+    "Converted JHEPA meeting slide tables into editable Microsoft Excel tables for easier sharing and collaboration across UMK",
+    "Checked and arranged the table content to ensure the data was clear, structured, and ready for departmental use",
+    "Edited presentation slides as assigned to support the department’s ongoing work",
+    "Assisted with logistics work by helping move gift items from the truck to the department storage area"
+  ],
+  tools: ["Microsoft Excel", "Microsoft PowerPoint"],
+  skills: ["data organization", "document formatting", "teamwork", "logistics support", "adaptability"],
+  challenge: "Ensuring that slide content and table data were converted accurately into a shareable and editable format while also handling additional departmental tasks.",
+  solution: "Carefully reviewed the table structure, reformatted the data in Excel for easier collaboration, and managed time efficiently to complete both documentation and logistics support tasks.",
+  reflection: "I learned that supporting departmental operations requires flexibility, attention to detail, and the ability to handle both technical and physical tasks efficiently.",
+  status: "Completed",
+  image: "images/day5.jpg"
+}
+];
+
+const searchInput = document.getElementById("searchInput");
+const weekFilter = document.getElementById("weekFilter");
+const statusFilter = document.getElementById("statusFilter");
+const entriesContainer = document.getElementById("entriesContainer");
+const stats = document.getElementById("stats");
+
+function uniqueWeeks(data){
+  return [...new Set(data.map(item => item.week))];
+}
+
+function renderWeekOptions(){
+  uniqueWeeks(entries).forEach(week => {
+    const option = document.createElement("option");
+    option.value = week;
+    option.textContent = week;
+    weekFilter.appendChild(option);
+  });
+}
+
+function monthShort(dateStr){
+  const parts = dateStr.split(" ");
+  return `${parts[1]} ${parts[2]}`;
+}
+
+function dayOnly(dateStr){
+  return dateStr.split(" ")[0];
+}
+
+function computeStats(data){
+  const totalDays = data.length;
+  const completed = data.filter(item => item.status === "Completed").length;
+  const tools = new Set(data.flatMap(item => item.tools));
+  const weeks = new Set(data.map(item => item.week));
+  return [
+    { label:"Total Entries", value: totalDays },
+    { label:"Completed Days", value: completed },
+    { label:"Weeks Recorded", value: weeks.size },
+    { label:"Tools Used", value: tools.size }
+  ];
+}
+
+function renderStats(data){
+  stats.innerHTML = computeStats(data).map(item => `
+    <div class="stat-card">
+      <div class="label">${item.label}</div>
+      <div class="value">${item.value}</div>
+    </div>
+  `).join("");
+}
+
+function entryPhotoHTML(image, title){
+  if(!image){
+    return `<div class="placeholder">No evidence image inserted yet.</div>`;
+  }
+  return `<img src="${image}" alt="${title}" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend','<div class=&quot;placeholder&quot;>Image file not found yet. Insert your evidence image in the images folder.</div>')">`;
+}
+
+function groupByWeek(data){
+  return data.reduce((acc, item) => {
+    if(!acc[item.week]) acc[item.week] = [];
+    acc[item.week].push(item);
+    return acc;
+  }, {});
+}
+
+function renderEntries(data){
+  const groups = groupByWeek(data);
+  const weeks = Object.keys(groups);
+
+  if(!weeks.length){
+    entriesContainer.innerHTML = `<div class="section-card">No entries found for the selected filter.</div>`;
+    return;
+  }
+
+  entriesContainer.innerHTML = weeks.map(week => `
+    <section class="week-block">
+      <div class="week-title">
+        <h3>${week}</h3>
+        <div class="week-chip">${groups[week].length} ${groups[week].length === 1 ? "entry" : "entries"}</div>
+      </div>
+      <div class="entry-grid">
+        ${groups[week].map(item => `
+          <article class="entry-card">
+            <div class="entry-head">
+              <div class="entry-head-left">
+                <div class="date-box">
+                  <div class="day">${dayOnly(item.date)}</div>
+                  <div class="month">${monthShort(item.date)}</div>
+                </div>
+                <div class="entry-meta">
+                  <h4>${item.title}</h4>
+                  <div class="sub">${item.day} • ${item.date}</div>
+                </div>
+              </div>
+              <div class="status-tag">${item.status}</div>
+            </div>
+            <div class="entry-body">
+              <div class="section-card">
+                <h5>Tasks Performed</h5>
+                <ul>${item.tasks.map(task => `<li>${task}</li>`).join("")}</ul>
+              </div>
+              <div>
+                <div class="kv">
+                  <div><strong>Tools / Software Used</strong>${item.tools.join(", ")}</div>
+                  <div><strong>Knowledge / Skills Learned</strong>${item.skills.join(", ")}</div>
+                  <div><strong>Problems Encountered</strong>${item.challenge}</div>
+                  <div><strong>How the Problem Was Solved</strong>${item.solution}</div>
+                  <div><strong>Reflection</strong>${item.reflection}</div>
+                </div>
+                <div class="photo-wrap">
+                  ${entryPhotoHTML(item.image, item.title)}
+                </div>
+              </div>
+            </div>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `).join("");
+}
+
+function applyFilters(){
+  const term = searchInput.value.trim().toLowerCase();
+  const week = weekFilter.value;
+  const status = statusFilter.value;
+
+  const filtered = entries.filter(item => {
+    const searchable = [
+      item.date, item.week, item.day, item.title, item.challenge,
+      item.solution, item.reflection, item.status,
+      ...item.tasks, ...item.tools, ...item.skills
+    ].join(" ").toLowerCase();
+
+    const matchSearch = !term || searchable.includes(term);
+    const matchWeek = week === "all" || item.week === week;
+    const matchStatus = status === "all" || item.status === status;
+
+    return matchSearch && matchWeek && matchStatus;
+  });
+
+  renderStats(filtered);
+  renderEntries(filtered);
+}
+
+function resetFilters(){
+  searchInput.value = "";
+  weekFilter.value = "all";
+  statusFilter.value = "all";
+  applyFilters();
+}
+
+searchInput.addEventListener("input", applyFilters);
+weekFilter.addEventListener("change", applyFilters);
+statusFilter.addEventListener("change", applyFilters);
+
+renderWeekOptions();
+applyFilters();
+</script>
+</body>
+</html>
