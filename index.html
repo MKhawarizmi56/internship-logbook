@@ -443,9 +443,98 @@ html[data-theme="dark"] .clock{color:#9fc7ff}.date-line{color:var(--muted);font-
 @media(max-width:1200px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto;top:auto;border-right:0;border-bottom:1px solid var(--line);flex-direction:row;align-items:center;overflow:auto}.nav{display:flex}.sidebar-bottom{margin-top:0;margin-left:auto;min-width:240px}.hero{grid-template-columns:1fr}.stats-grid,.project-grid,.game-grid,.media-grid{grid-template-columns:repeat(2,1fr)}.controls{grid-template-columns:1fr 1fr}.entry-grid-cards .logbook-list,.entry-evidence-gallery .logbook-list{grid-template-columns:1fr 1fr}}
 @media(max-width:760px){:root{--topbar:auto}.topbar{position:relative;height:auto;align-items:flex-start;flex-direction:column}.top-actions{justify-content:flex-start}.content{width:min(100% - 24px,1480px);padding-top:18px}.hero-panel{padding:24px}.hero h1{font-size:48px}.profile-top{grid-template-columns:1fr}.profile-kpis,.stats-grid,.project-grid,.game-grid,.media-grid,.entry-grid-cards .logbook-list,.entry-evidence-gallery .logbook-list{grid-template-columns:1fr}.controls{grid-template-columns:1fr}.entry-head{grid-template-columns:1fr}.entry-body{grid-template-columns:1fr}.welcome-shell{height:96vh;border-radius:26px;padding:12px}.welcome-top,.welcome-footer{flex-direction:column;align-items:stretch}.welcome-title h1{font-size:34px}.welcome-stage{border-radius:22px}.welcome-video,.welcome-fallback{min-height:280px}.welcome-card ul{justify-content:flex-start}.memory-board{grid-template-columns:repeat(4,1fr)}.memory-card{height:54px}.sudoku{grid-template-columns:repeat(4,1fr)}.sudoku input{width:100%}.sidebar{display:block}.nav{overflow:auto}.sidebar-bottom{margin-left:0}.logo-card{margin-bottom:10px}}
 @media print{body::before,#liveWallpaper,.bg-grid,.soft-orb,.welcome,.sidebar,.topbar,.guide,.toolbar,.chips,.controls,.week-pulse,.modal,.image-modal{display:none!important}.app{display:block}.content{width:100%;padding:0}.panel,.hero-panel,.profile-panel,.time-capsule,.entry,.stat-card{box-shadow:none!important;background:#fff!important}.entry{break-inside:avoid}.entry-body{display:block}.photo{display:none}.hero{display:block}.stats-grid{grid-template-columns:repeat(4,1fr)}}
+
+
+/* ==========================================================
+   FINAL FUNCTION PACK — clean, light premium, useful features
+   ========================================================== */
+html[data-theme="light"] body{
+  background:
+    radial-gradient(circle at 12% 6%, rgba(237,69,99,.13), transparent 27%),
+    radial-gradient(circle at 86% 10%, rgba(7,123,237,.14), transparent 31%),
+    radial-gradient(circle at 50% 100%, rgba(141,57,208,.10), transparent 34%),
+    linear-gradient(135deg,#fbfcff 0%,#eef4ff 42%,#fff4fa 100%);
+}
+.reading-progress{
+  position:fixed;left:0;top:0;height:4px;width:0%;z-index:1000;
+  background:linear-gradient(90deg,var(--rose),var(--violet),var(--sky),var(--cyan));
+  box-shadow:0 0 22px rgba(7,123,237,.45);
+  transition:width .12s linear;
+}
+.topbar{backdrop-filter:blur(18px);}
+.hero-panel,.profile-panel,.time-capsule,.panel,.stat-card{
+  border:1px solid rgba(34,60,204,.13);
+}
+.hero-panel::after{
+  content:"";position:absolute;inset:auto 18px 18px auto;width:190px;height:190px;border-radius:50%;
+  background:radial-gradient(circle,rgba(237,69,99,.16),rgba(7,123,237,.08),transparent 70%);
+  pointer-events:none;filter:blur(2px);
+}
+body.supervisor-mode #games,
+body.supervisor-mode #media,
+body.supervisor-mode .guide,
+body.supervisor-mode .sidebar-bottom,
+body.supervisor-mode #welcomeAgainBtn,
+body.supervisor-mode #motionToggle{
+  display:none!important;
+}
+body.supervisor-mode .app{grid-template-columns:220px 1fr;}
+body.supervisor-mode .panel,body.supervisor-mode .hero-panel,body.supervisor-mode .profile-panel,body.supervisor-mode .time-capsule{box-shadow:0 16px 36px rgba(17,25,54,.08)}
+body.supervisor-mode #supervisorToggle{background:linear-gradient(135deg,#16a34a,#22c55e);color:white;border-color:transparent;}
+.module-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+.module-grid.two{grid-template-columns:1.1fr .9fr;}
+.feature-card,.achievement-card,.journey-step,.reflection-card,.story-card,.completion-card,.skill-card{
+  background:rgba(255,255,255,.78);border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 18px 46px rgba(34,60,204,.08);position:relative;overflow:hidden;
+}
+html[data-theme="dark"] .feature-card,html[data-theme="dark"] .achievement-card,html[data-theme="dark"] .journey-step,html[data-theme="dark"] .reflection-card,html[data-theme="dark"] .story-card,html[data-theme="dark"] .completion-card,html[data-theme="dark"] .skill-card{background:rgba(16,22,66,.70)}
+.feature-card::before,.achievement-card::before,.journey-step::before,.reflection-card::before,.story-card::before,.completion-card::before,.skill-card::before{
+  content:"";position:absolute;left:0;top:0;width:100%;height:4px;background:linear-gradient(90deg,var(--rose),var(--violet),var(--sky),var(--cyan));
+}
+.feature-card h3,.achievement-card h3,.journey-step h3,.reflection-card h3,.completion-card h3,.skill-card h3{margin:0 0 8px;color:var(--ink);font-size:18px;}
+.feature-card p,.achievement-card p,.journey-step p,.reflection-card p,.completion-card p,.skill-card p{margin:0;color:var(--muted);line-height:1.65;font-weight:650;}
+.achievement-card{min-height:166px;transition:.22s ease;}
+.achievement-card.unlocked{transform:translateY(-2px);box-shadow:0 22px 60px rgba(7,123,237,.12);}
+.achievement-icon{width:48px;height:48px;border-radius:17px;display:grid;place-items:center;margin-bottom:12px;font-size:22px;font-weight:900;background:linear-gradient(135deg,#fff,#eaf4ff);box-shadow:inset 0 0 0 1px var(--line),0 12px 24px rgba(34,60,204,.09)}
+.achievement-card.locked{opacity:.58;filter:saturate(.65);}
+.achievement-card.locked .achievement-icon{background:#eef2ff;color:#8290b3;}
+.journey-map{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;position:relative;}
+.journey-step{min-height:150px;}
+.journey-step .step-no{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,var(--royal),var(--violet));color:white;display:grid;place-items:center;font-weight:900;margin-bottom:10px;}
+.story-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;}
+.story-card{padding:14px;cursor:pointer;transition:.2s ease;text-align:left;border:1px solid rgba(34,60,204,.14);}
+.story-card:hover{transform:translateY(-3px);box-shadow:0 18px 46px rgba(141,57,208,.12)}
+.story-card strong{display:block;color:var(--ink);margin-bottom:5px;}
+.story-card span{color:var(--muted);font-size:12px;font-weight:750;}
+.skill-list{display:grid;gap:12px;}
+.skill-row{display:grid;grid-template-columns:160px 1fr 54px;gap:12px;align-items:center;}
+.skill-bar{height:12px;border-radius:999px;background:rgba(34,60,204,.10);overflow:hidden;border:1px solid var(--line)}
+.skill-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--royal),var(--sky),var(--cyan));width:0%;transition:width .7s ease;}
+.skill-row b{color:var(--ink);font-size:13px}.skill-row span{text-align:right;color:var(--muted);font-weight:900;font-size:12px;}
+.completion-card{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;}
+.completion-ring{width:128px;height:128px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--sky) var(--pct),rgba(34,60,204,.10) 0);box-shadow:inset 0 0 0 12px rgba(255,255,255,.72);font-size:24px;font-weight:950;color:var(--royal);}
+.reflection-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+.reflection-card blockquote{margin:0;color:var(--ink);font-size:16px;line-height:1.55;font-weight:800;}
+.reflection-card small{display:block;margin-top:12px;color:var(--muted);font-weight:800;}
+.project-card{cursor:pointer;}
+.project-card:hover{transform:translateY(-4px);}
+.project-detail{display:grid;gap:12px;}
+.project-detail .detail-block{background:var(--surface-3);border:1px solid var(--line);border-radius:18px;padding:14px;}
+.project-detail h4{margin:0 0 6px;color:var(--royal)}
+.project-detail p{margin:0;line-height:1.6;color:var(--text)}
+.pinned-dock{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:60;display:grid;gap:10px;}
+.pinned-dock button{width:46px;height:46px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.76);backdrop-filter:blur(14px);box-shadow:0 14px 34px rgba(17,25,54,.10);font-weight:900;color:var(--royal);}
+html[data-theme="dark"] .pinned-dock button{background:rgba(16,22,66,.76);color:#fff;}
+.entry-tools-note{font-size:12px;color:var(--muted);font-weight:750;margin-top:8px;}
+.impact-kpi{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}.impact-kpi span{background:var(--surface-3);border:1px solid var(--line);border-radius:999px;padding:8px 11px;font-weight:850;color:var(--royal);font-size:12px;}
+.add-entry-mini{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.add-entry-mini textarea{grid-column:1/-1}.helper-code{width:100%;min-height:180px;border-radius:18px;border:1px solid var(--line);padding:14px;background:var(--surface-3);color:var(--text);font-family:ui-monospace,Consolas,monospace;font-size:12px;}
+@media(max-width:1180px){.module-grid,.module-grid.two,.journey-map,.story-grid,.reflection-grid{grid-template-columns:1fr 1fr}.pinned-dock{display:none}}
+@media(max-width:760px){.module-grid,.module-grid.two,.journey-map,.story-grid,.reflection-grid,.completion-card{grid-template-columns:1fr}.skill-row{grid-template-columns:1fr}.skill-row span{text-align:left}.completion-ring{width:112px;height:112px}.add-entry-mini{grid-template-columns:1fr}}
+@media print{#achievements,#journey,#analytics,#reflectionWall,.pinned-dock,.reading-progress{break-inside:avoid}.story-grid,.module-grid,.journey-map,.reflection-grid{grid-template-columns:1fr 1fr!important}}
+
 </style>
 </head>
 <body class="intro-open">
+<div id="readingProgress" class="reading-progress"></div>
 <canvas id="liveWallpaper" aria-hidden="true"></canvas>
 <div class="bg-grid" aria-hidden="true"></div>
 <div class="soft-orb orb-a" aria-hidden="true"></div><div class="soft-orb orb-b" aria-hidden="true"></div><div class="soft-orb orb-c" aria-hidden="true"></div>
@@ -504,6 +593,9 @@ html[data-theme="dark"] .clock{color:#9fc7ff}.date-line{color:var(--muted);font-
       <button class="nav-link active" data-target="overview"><span class="nav-icon">⌂</span>Overview</button>
       <button class="nav-link" data-target="logbook"><span class="nav-icon">☰</span>Logbook</button>
       <button class="nav-link" data-target="projects"><span class="nav-icon">◇</span>Projects</button>
+      <button class="nav-link" data-target="journey"><span class="nav-icon">↝</span>Journey</button>
+      <button class="nav-link" data-target="achievements"><span class="nav-icon">★</span>Badges</button>
+      <button class="nav-link" data-target="analytics"><span class="nav-icon">◎</span>Analytics</button>
       <button class="nav-link" data-target="media"><span class="nav-icon">▶</span>Media</button>
       <button class="nav-link" data-target="games"><span class="nav-icon">✦</span>Games</button>
       <button class="nav-link" data-target="guide"><span class="nav-icon">?</span>Guide</button>
@@ -523,6 +615,7 @@ html[data-theme="dark"] .clock{color:#9fc7ff}.date-line{color:var(--muted);font-
       <div class="top-actions">
         <button id="themeToggle" class="switch">☀ Light</button>
         <button id="langToggle" class="switch">BM / EN</button>
+        <button id="supervisorToggle" class="switch">Supervisor View</button>
         <button id="motionToggle" class="switch">Live BG On</button>
         <button id="printBtnTop" class="btn small primary">Print / PDF</button>
       </div>
@@ -568,6 +661,49 @@ html[data-theme="dark"] .clock{color:#9fc7ff}.date-line{color:var(--muted);font-
 
       <section class="stats-grid" id="statsGrid"></section>
 
+
+
+      <section id="journey" class="section panel">
+        <div class="section-head">
+          <div><h2>Project Journey</h2><p>A clear visual story from proposal to deployment, showing how the internship project matured into working HEPA systems.</p></div>
+          <button id="copyJourneyBtn" class="btn small subtle">Copy Journey Summary</button>
+        </div>
+        <div id="journeyMap" class="journey-map"></div>
+      </section>
+
+      <section id="achievements" class="section panel">
+        <div class="section-head">
+          <div><h2>Achievement Badges</h2><p>Badges are unlocked automatically from the logbook evidence, tools and project keywords.</p></div>
+          <button id="copyAchievementBtn" class="btn small subtle">Copy Achievements</button>
+        </div>
+        <div id="achievementGrid" class="module-grid"></div>
+      </section>
+
+      <section id="analytics" class="section panel">
+        <div class="section-head">
+          <div><h2>Internship Analytics</h2><p>Auto-generated overview of focus areas, skills, project output and internship impact.</p></div>
+          <button id="copyPortfolioBtn" class="btn small primary">Copy Portfolio Summary</button>
+        </div>
+        <div class="module-grid two">
+          <div class="skill-card">
+            <h3>Skill Map</h3>
+            <p>Calculated from all task descriptions, tools and reflections.</p>
+            <div id="skillMap" class="skill-list" style="margin-top:14px"></div>
+          </div>
+          <div class="completion-card" id="completionCard">
+            <div>
+              <h3>Completion Snapshot</h3>
+              <p id="completionText">Loading progress...</p>
+              <div id="impactKpi" class="impact-kpi"></div>
+            </div>
+            <div id="completionRing" class="completion-ring" style="--pct:0%">0%</div>
+          </div>
+        </div>
+        <div style="height:16px"></div>
+        <h3 style="margin:0 0 12px;color:var(--ink)">Search by Story</h3>
+        <div id="storyGrid" class="story-grid"></div>
+      </section>
+
       <section id="logbook" class="section panel">
         <div class="section-head">
           <div><h2>Master Logbook</h2><p>Search, filter, read, export and print the internship record from one professional control centre.</p></div>
@@ -588,6 +724,8 @@ html[data-theme="dark"] .clock{color:#9fc7ff}.date-line{color:var(--muted);font-
           <button id="exportJsonBtn" class="btn small subtle">Export JSON</button>
           <button id="exportCsvBtn" class="btn small subtle">Export CSV</button>
           <button id="resetFiltersBtn" class="btn small subtle">Reset Filters</button>
+          <button id="bookmarkOnlyBtn" class="btn small subtle">Bookmarked Only</button>
+          <button id="supervisorPrintBtn" class="btn small subtle">Supervisor PDF View</button>
         </div>
         <div id="weekPulse" class="week-pulse"></div>
         <div id="logbookWrap"><div id="logbookList" class="logbook-list"></div></div>
@@ -623,12 +761,22 @@ html[data-theme="dark"] .clock{color:#9fc7ff}.date-line{color:var(--muted);font-
         </div>
       </section>
 
+
+
+      <section id="reflectionWall" class="section panel">
+        <div class="section-head"><div><h2>Reflection Wall</h2><p>Selected high-value reflections from the internship journey, generated from the logbook record.</p></div><button id="copyReflectionBtn" class="btn small subtle">Copy Reflections</button></div>
+        <div id="reflectionGrid" class="reflection-grid"></div>
+      </section>
+
       <section id="guide" class="section panel">
         <div class="section-head"><div><h2>Update Guide</h2><p>For daily updates, edit the clearly marked logbook data area inside this single index.html file.</p></div></div>
         <div class="project-grid">
           <div class="project-card"><h3>1. Add New Entry</h3><p>Use the generator button, copy the object, then paste it before the closing bracket of <b>LOGBOOK_ENTRIES</b>.</p></div>
           <div class="project-card"><h3>2. Add Evidence</h3><p>Place image files inside <b>images/</b> and use paths such as <b>images/day64.jpg</b>.</p></div>
           <div class="project-card"><h3>3. Upload GitHub</h3><p>Replace only <b>index.html</b>, commit changes, then wait for GitHub Pages to refresh.</p></div>
+          <div class="project-card"><h3>4. Supervisor View</h3><p>Use Supervisor View before formal review. It hides games and keeps the website focused on logbook, projects, evidence and analytics.</p></div>
+          <div class="project-card"><h3>5. Evidence Naming</h3><p>Use consistent names such as <b>day59.jpg</b>, <b>poster-ourday.jpg</b>, or <b>system-demo.mp4</b> to make updates easier.</p></div>
+          <div class="project-card"><h3>6. Best Update Routine</h3><p>Add one entry, add one evidence photo if available, test locally, then upload the updated <b>index.html</b> to GitHub.</p></div>
         </div>
       </section>
     </div>
@@ -650,6 +798,15 @@ html[data-theme="dark"] .clock{color:#9fc7ff}.date-line{color:var(--muted);font-
 <div id="entryModal" class="modal"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle">Entry</h2><button class="btn small subtle modal-close">Close</button></div><div id="modalContent"></div></div></div>
 <div id="draftModal" class="modal"><div class="modal-card"><div class="modal-head"><h2>Generate New Entry Code</h2><button class="btn small subtle modal-close">Close</button></div><div class="controls" style="grid-template-columns:1fr 1fr"><input id="draftDate" class="input" placeholder="Date e.g. 28 June 2026"><input id="draftWeek" class="input" placeholder="Week e.g. Week 14"><input id="draftDay" class="input" placeholder="Day e.g. Day 59"><input id="draftTitle" class="input" placeholder="Title"></div><textarea id="draftTasks" placeholder="Tasks, one per line"></textarea><textarea id="draftReflection" placeholder="Reflection"></textarea><div class="toolbar"><button id="generateDraftBtn" class="btn primary">Generate Code</button><button id="copyDraftBtn" class="btn subtle">Copy Code</button></div><textarea id="draftOutput" readonly style="margin-top:12px;height:260px"></textarea></div></div>
 <div id="imageModal" class="image-modal"><button class="btn ghost" id="closeImageModal" style="position:fixed;top:20px;right:20px;z-index:2">Close</button><div id="imageModalContent"></div></div>
+
+<div id="projectModal" class="modal"><div class="modal-card"><div class="modal-head"><h2 id="projectModalTitle">Project</h2><button class="btn small subtle modal-close">Close</button></div><div id="projectModalContent" class="project-detail"></div></div></div>
+<div class="pinned-dock" aria-label="Quick tools">
+  <button id="dockTop" title="Back to top">↑</button>
+  <button id="dockLatest" title="Latest entry">★</button>
+  <button id="dockSupervisor" title="Supervisor view">SV</button>
+  <button id="dockAdd" title="Generate entry">＋</button>
+</div>
+
 <div id="toast" class="toast">Done</div>
 
 <script>
@@ -3043,5 +3200,95 @@ function bindEvents(){
 function init(){ applyTheme(); applyMotion(); renderXP(); renderOptions(); filteredEntries=sortEntries(LOGBOOK_ENTRIES); filterEntries(); initWelcome(); initWallpaper(); renderSudoku(false); renderMemory(); renderQuiz(); renderTimer(); bindEvents(); clock(); quoteLoop(); setInterval(clock,1000); setInterval(quoteLoop,7000); }
 document.addEventListener('DOMContentLoaded',init);
 </script>
+
+<script>
+/* ============================================================
+   FINAL FEATURE PACK — supervisor mode, badges, analytics,
+   journey, story search, bookmarks, project modals and helpers.
+   This script is separated so daily entries remain easy to edit.
+   ============================================================ */
+const PROJECT_DETAILS = {
+  "HEPA PRO": {
+    problem:"Manual performance tracking can become slow and difficult to review when KPI, action plans, quarterly achievement and evidence are separated.",
+    solution:"A structured performance reporting system that supports KPI monitoring, action plan records, quarterly updates and evidence-based reporting.",
+    contribution:"Designed and developed the flow, interface, dashboard logic, record handling and reporting preparation for departmental review.",
+    impact:"Improves visibility of performance progress and supports more organised HEPA reporting."
+  },
+  "HEPA G-FUND": {
+    problem:"Income generation, funding records and contributor information require a cleaner workflow for entry, review, import and reporting.",
+    solution:"A funding and income generation system with record management, contributor support, smart import concept and deployment preparation.",
+    contribution:"Built major system functions, refined UI, handled deployment issues, coordinated with CICT and prepared the system for institutional use.",
+    impact:"Supports clearer funding records and contributed to a real UMK-linked system deployment journey."
+  },
+  "HEPA QMS": {
+    problem:"Quality management content needs a structured platform that is easier to navigate, maintain and explain to users.",
+    solution:"A quality management system prototype with smoother flow, clearer content sections and tutorial readiness.",
+    contribution:"Prepared system flow, prototype, presentation, feedback revision and final refinement based on supervisor and officer comments.",
+    impact:"Shows ability to build multiple connected systems and translate stakeholder feedback into a better workflow."
+  }
+};
+const JOURNEY_STEPS = [
+  {title:"Proposal", text:"Defined the project direction, problem focus and expected system value."},
+  {title:"Workflow", text:"Mapped how users, records, approvals and outputs should move inside the systems."},
+  {title:"Prototype", text:"Converted flow ideas into working screens and practical navigation."},
+  {title:"Review", text:"Presented work to supervisor, boss and officers for correction and alignment."},
+  {title:"Build", text:"Developed HEPA PRO, HEPA G-FUND and HEPA QMS while refining UI and functions."},
+  {title:"Troubleshoot", text:"Handled backend, database, upload and hosting issues during deployment preparation."},
+  {title:"Deploy", text:"Coordinated with CICT and published the system under the UMK HEPA environment."},
+  {title:"Guide", text:"Prepared tutorials, demo direction and documentation for future users. "}
+];
+const ACHIEVEMENTS = [
+  {icon:"⚙", title:"System Builder", need:"system", desc:"Unlocked by system development entries involving HEPA systems."},
+  {icon:"🚀", title:"Deployment Warrior", need:"deploy", desc:"Unlocked through CICT, domain, backend, database and deployment work."},
+  {icon:"🎨", title:"Design Specialist", need:"poster", desc:"Unlocked through poster, certificate, slide and creative design support."},
+  {icon:"📑", title:"Documentation Pro", need:"proposal", desc:"Unlocked through proposal, documentation, reporting and logbook work."},
+  {icon:"🤝", title:"Event Support Hero", need:"program", desc:"Unlocked through programmes, logistics, events and staff activities."},
+  {icon:"🏆", title:"Full Stack Intern", need:"all", desc:"Unlocked by completing multiple systems and maintaining strong records."}
+];
+const STORY_FILTERS = [
+  {label:"System development", term:"system HEPA prototype backend database", countKey:"System"},
+  {label:"CICT deployment", term:"CICT deploy domain backend database upload", countKey:"Deployment"},
+  {label:"Poster & design", term:"poster design Canva certificate slide", countKey:"Design"},
+  {label:"Proposal & documentation", term:"proposal documentation report document", countKey:"Admin"},
+  {label:"Events & logistics", term:"programme program logistics Our Day Hari Raya KUCA laptop", countKey:"Event"}
+];
+function countByTerms(terms){ const low=String(terms).toLowerCase().split(/\s+/).filter(Boolean); return LOGBOOK_ENTRIES.filter(e=>low.some(t=>getSearchText(e).includes(t))).length; }
+function renderJourney(){ const el=$("journeyMap"); if(!el) return; el.innerHTML=JOURNEY_STEPS.map((s,i)=>`<article class="journey-step"><div class="step-no">${i+1}</div><h3>${escapeHTML(s.title)}</h3><p>${escapeHTML(s.text)}</p></article>`).join(""); }
+function renderAchievements(){ const el=$("achievementGrid"); if(!el) return; const allUnlocked=LOGBOOK_ENTRIES.length>=50 && countByTerms("HEPA PRO G-FUND QMS")>10; el.innerHTML=ACHIEVEMENTS.map(a=>{ const unlocked=a.need==='all'?allUnlocked:countByTerms(a.need)>0; return `<article class="achievement-card ${unlocked?'unlocked':'locked'}"><div class="achievement-icon">${a.icon}</div><h3>${escapeHTML(a.title)}</h3><p>${escapeHTML(a.desc)}</p><div class="impact-kpi"><span>${unlocked?'Unlocked':'Locked'}</span><span>${a.need==='all'?LOGBOOK_ENTRIES.length+' records':countByTerms(a.need)+' matches'}</span></div></article>`; }).join(""); }
+function renderSkillMap(){ const skills={"System Development":countByTerms("system HEPA backend database prototype deploy"),"Design & Visual Communication":countByTerms("poster design Canva slide certificate"),"Documentation":countByTerms("document documentation proposal report printing"),"Technical Support":countByTerms("driver printer technical troubleshooting backend server"),"Event & Logistics":countByTerms("program programme logistics Our Day Hari Raya KUCA laptop"),"Communication":countByTerms("meeting discussion supervisor consultation guide student")}; const max=Math.max(...Object.values(skills),1); const el=$("skillMap"); if(!el) return; el.innerHTML=Object.entries(skills).map(([k,v])=>`<div class="skill-row"><b>${escapeHTML(k)}</b><div class="skill-bar"><i style="width:${Math.max(8,Math.round(v/max*100))}%"></i></div><span>${v}</span></div>`).join(""); }
+function renderCompletion(){ const completed=LOGBOOK_ENTRIES.filter(e=>(e.status||'').toLowerCase().includes('completed')).length; const pct=Math.min(100,Math.round(completed/Math.max(LOGBOOK_ENTRIES.length,1)*100)); const ring=$("completionRing"); if(ring){ ring.style.setProperty('--pct',pct+'%'); ring.textContent=pct+'%'; } const text=$("completionText"); if(text) text.textContent=`${completed} completed working records from ${LOGBOOK_ENTRIES.length} total logbook records, covering systems, documentation, design, technical support, events and logistics.`; const impact=$("impactKpi"); if(impact) impact.innerHTML=`<span>3 HEPA systems</span><span>${allWeeks().length} weeks</span><span>${countByTerms('poster design certificate')} design records</span><span>${countByTerms('CICT deploy database backend')} deployment records</span>`; }
+function renderStoryGrid(){ const el=$("storyGrid"); if(!el) return; el.innerHTML=STORY_FILTERS.map(s=>`<button class="story-card" data-story="${escapeHTML(s.term)}"><strong>${escapeHTML(s.label)}</strong><span>${countByTerms(s.term)} related entries</span></button>`).join(""); }
+function renderReflectionWall(){ const el=$("reflectionGrid"); if(!el) return; const picks=sortEntries(LOGBOOK_ENTRIES).filter(e=>e.reflection && e.reflection.length>120).slice(-9).filter((_,i)=>i%3===0).slice(0,3); el.innerHTML=picks.map(e=>`<article class="reflection-card"><blockquote>“${escapeHTML(e.reflection.slice(0,210))}${e.reflection.length>210?'…':''}”</blockquote><small>${escapeHTML(e.date)} · ${escapeHTML(e.title)}</small></article>`).join(""); }
+function portfolioSummary(){ return `Muhammad Khawarizmi completed an industrial training journey at JHEPA UMK involving ${LOGBOOK_ENTRIES.length} logbook records across ${allWeeks().length} weeks. The work covered HEPA PRO, HEPA G-FUND and HEPA QMS system development, proposal documentation, technical troubleshooting, CICT deployment coordination, poster and certificate design, event support, logistics, evidence preparation and tutorial readiness.`; }
+function journeySummary(){ return JOURNEY_STEPS.map((s,i)=>`${i+1}. ${s.title}: ${s.text}`).join('\n'); }
+function achievementSummary(){ return ACHIEVEMENTS.map(a=>`${a.title}: ${countByTerms(a.need==='all'?'HEPA PRO G-FUND QMS':a.need)} evidence match(es)`).join('\n'); }
+function openProjectModal(title){ const data=PROJECT_DETAILS[title]; if(!data) return; $("projectModalTitle").textContent=title; $("projectModalContent").innerHTML=Object.entries(data).map(([k,v])=>`<div class="detail-block"><h4>${k[0].toUpperCase()+k.slice(1)}</h4><p>${escapeHTML(v)}</p></div>`).join(""); $("projectModal").classList.add("show"); addXP(4); }
+function setSupervisorMode(on){ document.body.classList.toggle('supervisor-mode',on); localStorage.setItem('supervisorMode',on?'on':'off'); const b=$("supervisorToggle"); if(b) b.textContent=on?'Supervisor On':'Supervisor View'; if(on) toast('Supervisor view enabled'); }
+function updateReadingProgress(){ const doc=document.documentElement; const max=doc.scrollHeight-doc.clientHeight; const pct=max>0?(doc.scrollTop/max*100):0; const bar=$("readingProgress"); if(bar) bar.style.width=pct+'%'; }
+function upgradeBookmarks(){ const saved=JSON.parse(localStorage.getItem('bookmarkedEntries')||'[]'); document.addEventListener('click',e=>{ const b=e.target.closest('.bookmark-btn'); if(!b) return; const title=b.dataset.title||''; const next=new Set(JSON.parse(localStorage.getItem('bookmarkedEntries')||'[]')); next.has(title)?next.delete(title):next.add(title); localStorage.setItem('bookmarkedEntries',JSON.stringify([...next])); toast(next.has(title)?'Entry bookmarked':'Bookmark removed'); }); }
+function showBookmarkedOnly(){ const saved=new Set(JSON.parse(localStorage.getItem('bookmarkedEntries')||'[]')); if(!saved.size){toast('No bookmarks yet'); return;} filteredEntries=sortEntries(LOGBOOK_ENTRIES).filter(e=>saved.has(e.title)); renderStats(); renderWeekPulse(); renderLogbook(); document.getElementById('logbook').scrollIntoView({behavior:'smooth'}); }
+function enhanceGuideReply(){ const old=guideReply; window.guideReply=function(q){ const text=String(q||'').toLowerCase(); if(text.includes('badge')||text.includes('achievement')){ const ans=achievementSummary(); const log=$('chatLog'); log.insertAdjacentHTML('beforeend',`<p><b>You:</b> ${escapeHTML(q)}</p><p><b>RizoX:</b> ${escapeHTML(ans)}</p>`); log.scrollTop=log.scrollHeight; return; } if(text.includes('supervisor')){ setSupervisorMode(!document.body.classList.contains('supervisor-mode')); return; } if(text.includes('portfolio')){ const log=$('chatLog'); log.insertAdjacentHTML('beforeend',`<p><b>You:</b> ${escapeHTML(q)}</p><p><b>RizoX:</b> ${escapeHTML(portfolioSummary())}</p>`); log.scrollTop=log.scrollHeight; return; } old(q); } }
+function initFinalFeaturePack(){
+  renderJourney(); renderAchievements(); renderSkillMap(); renderCompletion(); renderStoryGrid(); renderReflectionWall(); upgradeBookmarks(); enhanceGuideReply();
+  if(localStorage.getItem('supervisorMode')==='on') setSupervisorMode(true);
+  $("supervisorToggle")?.addEventListener('click',()=>setSupervisorMode(!document.body.classList.contains('supervisor-mode')));
+  $("supervisorPrintBtn")?.addEventListener('click',()=>{setSupervisorMode(true); setTimeout(()=>window.print(),250);});
+  $("bookmarkOnlyBtn")?.addEventListener('click',showBookmarkedOnly);
+  $("copyPortfolioBtn")?.addEventListener('click',()=>copyText(portfolioSummary(),'Portfolio summary copied'));
+  $("copyJourneyBtn")?.addEventListener('click',()=>copyText(journeySummary(),'Journey summary copied'));
+  $("copyAchievementBtn")?.addEventListener('click',()=>copyText(achievementSummary(),'Achievements copied'));
+  $("copyReflectionBtn")?.addEventListener('click',()=>copyText($$("#reflectionGrid blockquote").map(x=>x.textContent).join('\n\n'),'Reflections copied'));
+  $("storyGrid")?.addEventListener('click',e=>{ const b=e.target.closest('[data-story]'); if(!b) return; $('searchInput').value=b.dataset.story; filterEntries(); document.getElementById('logbook').scrollIntoView({behavior:'smooth'}); addXP(3); });
+  $$(".project-card").forEach(card=>card.addEventListener('click',()=>{ const h=card.querySelector('h3'); if(h) openProjectModal(h.textContent.trim()); }));
+  $("projectModal")?.addEventListener('click',e=>{if(e.target.id==='projectModal')$('projectModal').classList.remove('show')});
+  $("dockTop")?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  $("dockLatest")?.addEventListener('click',()=>$("latestBtn")?.click());
+  $("dockSupervisor")?.addEventListener('click',()=>$("supervisorToggle")?.click());
+  $("dockAdd")?.addEventListener('click',()=>$("draftEntryBtn")?.click());
+  window.addEventListener('scroll',updateReadingProgress,{passive:true}); updateReadingProgress();
+}
+document.addEventListener('DOMContentLoaded',initFinalFeaturePack);
+</script>
+
 </body>
 </html>
